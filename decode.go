@@ -18,7 +18,8 @@ var (
 	initErr      error
 )
 
-func Decode(raw []byte) (decoded string, err error) {
+// Decode a protobuf message and return a string representation
+func Decode(raw []byte) (string, error) {
 	if initErr != nil {
 		return "", fmt.Errorf("protoraw: init error: %w", initErr)
 	}
@@ -28,7 +29,7 @@ func Decode(raw []byte) (decoded string, err error) {
 		),
 	)
 
-	err = proto.Unmarshal(raw, message)
+	err := proto.Unmarshal(raw, message)
 	if err != nil {
 		return "", err
 	}
